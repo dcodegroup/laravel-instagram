@@ -1,6 +1,7 @@
 <?php
 
 namespace DcodeGroup\Instagramfeed;
+
 use GuzzleHttp\Client;
 
 class Provider {
@@ -11,7 +12,7 @@ class Provider {
 		{
 			try
 			{
-				$client   = new Client\();
+				$client   = new Client();
 				$url      = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' . $token;
 				$response = $client->get($url);
 				$body = json_decode((string)$response->getBody());
@@ -23,5 +24,6 @@ class Provider {
 			}
 		}
 
+		return $res;
 	}
 }
