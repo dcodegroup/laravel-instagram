@@ -1,0 +1,15 @@
+{
+    "name": "dcodegroup/instagramfeed",
+    "description": "Instagram Feed",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thong Nguyen",
+            "email": "tom@dcode.com.au"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3.2"
+    }
+}
