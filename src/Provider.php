@@ -1,6 +1,6 @@
 <?php
 
-namespace DcodeGroup\Instagramfeed;
+namespace Dcodegroup\Instagramfeed;
 
 use GuzzleHttp\Client;
 
