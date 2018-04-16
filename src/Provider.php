@@ -3,8 +3,45 @@
 namespace DcodeGroup\InstagramFeed;
 
 use GuzzleHttp\Client;
+use MetzWeb\Instagram\Instagram as MetInstagram;
 
 class Provider {
+
+	public static function getInstagramAccessToken($cliendId = null,$clientSecret = null, $redirectUri = null)
+	{
+		if (isset($cliendId) && isset($clientSecret) && isset($redirectUri))
+		{
+			$url = "https://api.instagram.com/oauth/authorize/?client_id=$cliendId&redirect_uri=$redirectUri&response_type=code";
+			header("Location: " . $url);
+
+			//Get Code
+			if(isset($_GET['code'])){
+				$code = ($_GET['code']);
+
+				$fields = array(
+					'client_id'     => $cliendId,
+					'client_secret' => $clientSecret,
+					'grant_type'    => 'authorization_code',
+					'redirect_uri'  => $redirectUri,
+					'code'          => $code
+				);
+				$url = 'https://api.instagram.com/oauth/access_token';
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, $url);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+				curl_setopt($ch,CURLOPT_POST,true);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+				$result = curl_exec($ch);
+				curl_close($ch);
+				$result = json_decode($result);
+				return $result->access_token; //your token
+
+			}
+		}
+		return null;
+	}
+
 	public static function getFeed($token = null)
 	{
 		$res = [];
