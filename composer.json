@@ -6,7 +6,8 @@
     "authors": [
         {
             "name": "Thong Nguyen",
-            "email": "tom@dcode.com.au"
+            "email": "tom@dcode.com.au",
+            "homepage": "https://dcodegroup.com"
         }
     ],
     "require": {
@@ -15,7 +16,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Dcodegroup\\": "vendor/dcodegroup/"
+            "DcodeGroup\\InstagramFeed\\": "src/"
+
         }
     }
 }
