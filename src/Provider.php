@@ -2,7 +2,9 @@
 
 namespace DcodeGroup\InstagramFeed;
 
+use DcodeGroup\InstagramFeed\Models\Instagram;
 use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 use MetzWeb\Instagram\Instagram as MetInstagram;
 
 class Provider {
@@ -40,6 +42,38 @@ class Provider {
 			return $result->access_token; //your token
 		}
 		return null;
+	}
+
+	public static function saveToken(Request $request)
+	{
+		$instagram = Instagram::where('client_id', $request->client_id)->first();
+
+		if (is_null($instagram)) {
+			$instagram = new Instagram();
+		}
+
+		$instagram->client_id = $request->client_id;
+		$instagram->client_secret = $request->client_secret;
+		$instagram->redirect_uri = $request->redirect_uri;
+		$instagram->user_id = auth()->id();
+		$instagram->save();
+
+		$cliendId = $instagram->client_id;
+		$redirectUri = $instagram->redirect_uri;
+
+		try {
+			Provider::setCode($cliendId, $redirectUri);
+
+			$instagram->access_token = Provider::getInstagramAccessToken($instagram->client_id,
+				$instagram->client_secret,
+				$instagram->redirect_uri,
+				$instagram->code);
+			$instagram->save();
+		} catch (\Exception $exception) {
+			dd($exception->getMessage());
+		}
+
+		return back();
 	}
 
 	public static function getFeed($token = null)
