@@ -63,12 +63,6 @@ class Provider {
 
 		try {
 			Provider::setCode($cliendId, $redirectUri);
-
-			$instagram->access_token = Provider::getInstagramAccessToken($instagram->client_id,
-				$instagram->client_secret,
-				$instagram->redirect_uri,
-				$instagram->code);
-			$instagram->save();
 		} catch (\Exception $exception) {
 			dd($exception->getMessage());
 		}
