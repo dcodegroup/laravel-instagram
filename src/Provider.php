@@ -44,17 +44,17 @@ class Provider {
 		return null;
 	}
 
-	public static function saveToken(Request $request)
+	public static function saveToken($cliendId = null, $clientSecret = null, $redirectUri = null)
 	{
-		$instagram = Instagram::where('client_id', $request->client_id)->first();
+		$instagram = Instagram::where('client_id', $cliendId)->first();
 
 		if (is_null($instagram)) {
 			$instagram = new Instagram();
 		}
 
-		$instagram->client_id = $request->client_id;
-		$instagram->client_secret = $request->client_secret;
-		$instagram->redirect_uri = $request->redirect_uri;
+		$instagram->client_id = $cliendId;
+		$instagram->client_secret = $clientSecret;
+		$instagram->redirect_uri = $redirectUri;
 		$instagram->user_id = auth()->id();
 		$instagram->save();
 
