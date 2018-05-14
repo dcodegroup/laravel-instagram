@@ -52,39 +52,36 @@ class Provider {
 		if (is_null($instagram)) {
 			$instagram = new Instagram();
 
-		$instagram->client_id = $cliendId;
-		$instagram->client_secret = $clientSecret;
-		$instagram->redirect_uri = $redirectUri;
-		$instagram->user_id = auth()->id();
-		$instagram->save();
+			$instagram->client_id = $cliendId;
+			$instagram->client_secret = $clientSecret;
+			$instagram->redirect_uri = $redirectUri;
+			$instagram->user_id = auth()->id();
+			$instagram->save();
 
-		$cliendId = $instagram->client_id;
-		$redirectUri = $instagram->redirect_uri;
+			$cliendId = $instagram->client_id;
+			$redirectUri = $instagram->redirect_uri;
 
-		try {
-			Provider::setCode($cliendId, $redirectUri);
-		} catch (\Exception $exception) {
-			dd($exception->getMessage());
+			try {
+				Provider::setCode($cliendId, $redirectUri);
+			} catch (\Exception $exception) {
+				dd($exception->getMessage());
+			}
+
+			return back();
 		}
-
-		return back();
 	}
 
 	public static function getFeed($token = null)
 	{
 		$res = [];
-		if (isset($token))
-		{
-			try
-			{
-				$client   = new Client();
-				$url      = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' . $token;
+		if (isset($token)) {
+			try {
+				$client = new Client();
+				$url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' . $token;
 				$response = $client->get($url);
 				$body = json_decode((string)$response->getBody());
-				return  $body->data;
-			}
-			catch (\Exception $e)
-			{
+				return $body->data;
+			} catch (\Exception $e) {
 				$res = [];
 			}
 		}
