@@ -3,7 +3,7 @@
 if (\Illuminate\Support\Facades\Schema::hasTable('instagrams')) {
 	$instagram = \DcodeGroup\InstagramFeed\Models\Instagram::all()->first();
 	if ($instagram) {
-		Route::get($instagram->redirect_uri, function (\Illuminate\Http\Request $request) use ($instagram) {
+		Route::get('instagram/callback', function (\Illuminate\Http\Request $request) use ($instagram) {
 			if ($request->has('code')) {
 				$instagram->code = $request->get('code');
 				$instagram->save();

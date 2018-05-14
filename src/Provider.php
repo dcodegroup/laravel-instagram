@@ -14,6 +14,7 @@ class Provider {
 		{
 			$url = "https://api.instagram.com/oauth/authorize/?client_id=$cliendId&redirect_uri=$redirectUri&response_type=code";
 			header("Location: " . $url);
+			die();
 		}
 		return null;
 	}
@@ -50,7 +51,6 @@ class Provider {
 
 		if (is_null($instagram)) {
 			$instagram = new Instagram();
-		}
 
 		$instagram->client_id = $cliendId;
 		$instagram->client_secret = $clientSecret;
