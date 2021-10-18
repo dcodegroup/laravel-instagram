@@ -20,8 +20,6 @@ class CreateInstagramProfilesTable extends Migration
 
 			$table->string('access_token')->nullable();
 			$table->dateTime('expires_at')->nullable();
-            $table->string('refresh_token')->nullable();
-            $table->dateTime('refresh_token_expires_at')->nullable();
 
 			$table->softDeletes();
 			$table->timestamps();

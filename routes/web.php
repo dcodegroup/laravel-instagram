@@ -1,24 +1,10 @@
 <?php
 
-if (\Illuminate\Support\Facades\Schema::hasTable('instagrams')) {
-	$instagram = \DcodeGroup\InstagramFeed\Models\Instagram::all()->first();
-	if ($instagram) {
-		Route::get('instagram/callback', function (\Illuminate\Http\Request $request) use ($instagram) {
-			if ($request->has('code')) {
-				$instagram->code = $request->get('code');
-				$instagram->save();
+use DcodeGroup\InstagramFeed\Controller\AuthorizationController;
+use DcodeGroup\InstagramFeed\Controller\RedirectController;
 
-				try {
-					$instagram->access_token = \DcodeGroup\InstagramFeed\Provider::getInstagramAccessToken($instagram->client_id,
-						$instagram->client_secret,
-						$instagram->redirect_uri,
-						$instagram->code);
-					$instagram->save();
-				} catch (\Exception $exception) {
-
-				}
-			}
-			return redirect('/');
-		});
-	}
-}
+Route::group(['name' => 'instagram.'], function () {
+    Route::post('/authorize', AuthorizationController::class)->name('authorize');
+    Route::get('/redirect', RedirectController::class)->name('redirect');
+    // Handle datadeletion route and failure route
+});

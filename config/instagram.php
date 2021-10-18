@@ -6,6 +6,9 @@ return [
 
     'scopes' => [
         'user_profile', 'user_media',
+        'instagram_graph_user_profile'
         // Add your scopes here
     ],
+
+    'redirect_route' => 'instagram.redirect'
 ];
