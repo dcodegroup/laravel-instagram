@@ -18,5 +18,12 @@
         "psr-4": {
             "DcodeGroup\\InstagramFeed\\" : "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DcodeGroup\\InstagramFeed\\InstagramProvider"
+            ]
+        }
     }
 }

@@ -11,6 +11,7 @@ class InstagramProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         $this->loadMigrationsFrom(__DIR__ . '/../migrations');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'instagram');
         $this->mergeConfigFrom(
             __DIR__ . '/../config/instagram.php', 'instagram'
         );

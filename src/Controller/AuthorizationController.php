@@ -8,7 +8,12 @@ use League\OAuth2\Client\Provider\Instagram;
 
 class AuthorizationController
 {
-    public function __invoke(Request $request, Instagram $instagramProvider)
+    public function form()
+    {
+        return view('instagram::authorize');
+    }
+
+    public function action(Request $request, Instagram $instagramProvider)
     {
         $authUrl = $instagramProvider->getAuthorizationUrl([
             'state' => Str::random(32),
