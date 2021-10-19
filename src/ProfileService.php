@@ -24,8 +24,6 @@ class ProfileService
             ->get($this->getEndpoint('/me/media'), ['fields' => join(',', $fields)])
             ->json();
 
-        dd($items);
-
         return collect($items);
     }
 
