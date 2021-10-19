@@ -24,7 +24,7 @@ class RedirectController
         $longLivedToken = $this->exchangeToken($instagramProvider, $token);
 
         Profile::create([
-            'profile_id' => $user->getNickname(),
+            'profile_id' => $user->getId(),
             'access_token' => $longLivedToken['access_token'],
             'expires_at' => now()->addSeconds($longLivedToken['expires_in']),
         ]);
