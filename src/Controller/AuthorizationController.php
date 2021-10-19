@@ -17,7 +17,7 @@ class AuthorizationController
     {
         $authUrl = $instagramProvider->getAuthorizationUrl([
             'state' => Str::random(32),
-            'scope' => config('instagram.scopes')
+            'scope' => config('instagram.scopes'),
         ]);
 
         $request->session()->put('oauth2state', $instagramProvider->getState());

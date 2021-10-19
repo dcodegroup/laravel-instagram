@@ -37,7 +37,7 @@ class InstagramAuthService
         ])
             ->json();
 
-        return new AccessToken($response['access_token']);
+        return new AccessToken($response);
     }
 
     public function isAuthorized(?string $userId = null): bool

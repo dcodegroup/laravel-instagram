@@ -10,5 +10,7 @@ return [
         // Add your scopes here
     ],
 
-    'redirect_route' => 'instagram.redirect'
+    'redirect_route' => 'instagram.redirect',
+
+    'auth_redirect_route' => 'admin.home',
 ];
