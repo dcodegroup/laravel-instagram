@@ -51,4 +51,9 @@ class InstagramAuthService
 
         return $query->exists();
     }
+
+    public function getGraphHost(): string
+    {
+        return $this->provider->getGraphHost();
+    }
 }
