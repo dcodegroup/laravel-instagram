@@ -2,13 +2,13 @@
 
 namespace DcodeGroup\InstagramFeed\Controller;
 
-use DcodeGroup\InstagramFeed\InstagramService;
+use DcodeGroup\InstagramFeed\InstagramAuthService;
 use DcodeGroup\InstagramFeed\Profile;
 use Illuminate\Http\Request;
 
 class RedirectController
 {
-    public function __invoke(Request $request, InstagramService $instagramService)
+    public function __invoke(Request $request, InstagramAuthService $instagramService)
     {
         // Try to get an access token (using the authorization code grant)
         $token = $instagramService->getAccessToken($request->input('code'));

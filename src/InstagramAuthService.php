@@ -7,7 +7,7 @@ use League\OAuth2\Client\Provider\Instagram;
 use League\OAuth2\Client\Provider\InstagramResourceOwner;
 use League\OAuth2\Client\Token\AccessToken;
 
-class InstagramService
+class InstagramAuthService
 {
     private Instagram $provider;
 
@@ -38,5 +38,17 @@ class InstagramService
             ->json();
 
         return new AccessToken($response['access_token']);
+    }
+
+    public function isAuthorized(?string $userId = null): bool
+    {
+        $query = Profile::query()
+            ->where('expires_at', '>', now());
+
+        if ($userId) {
+            $query->where('profile_id', $userId);
+        }
+
+        return $query->exists();
     }
 }
