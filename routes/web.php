@@ -23,7 +23,7 @@ Route::as(config('instagram.routing.name'))
         if (app()->environment('local')) {
             Route::get('/media-test', function (ProfileService $service) {
                 return view('instagram::media-test', [
-                    'media' => $service->getMedias(Profile::latest()->first(), 15)
+                    'mediaList' => $service->getMedias(Profile::latest()->first())
                 ]);
             });
         }
