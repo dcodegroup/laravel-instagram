@@ -17,10 +17,10 @@ class AuthorizationController
     {
         $authUrl = $instagramProvider->getAuthorizationUrl([
             'state' => Str::random(32),
-            'scope' => config('instagram.scopes'),
+            'scope' => config('instagram.oauth.scopes'),
         ]);
 
-        $request->session()->put('oauth2state', $instagramProvider->getState());
+        $request->session()->put(config('instagram.oauth.state_session_key'), $instagramProvider->getState());
 
         return redirect()->away($authUrl);
     }

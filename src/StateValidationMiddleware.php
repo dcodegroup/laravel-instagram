@@ -12,13 +12,17 @@ class StateValidationMiddleware
             abort(403);
         }
 
-        if($request->get('state') !== $request->session()->get('oauth2state')) {
-            // TODO: move oauth2state to variable or config
-            $request->session()->remove('oauth2state');
+        if($request->input('state') !== $this->getState($request)) {
+            $request->session()->remove(config('instagram.oauth.state_session_key'));
 
             abort(403);
         }
 
         return $next($request);
+    }
+
+    protected function getState(Request $request)
+    {
+        return $request->session()->get(config('instagram.oauth.state_session_key'));
     }
 }
