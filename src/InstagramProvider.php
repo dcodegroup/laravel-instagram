@@ -20,7 +20,7 @@ class InstagramProvider extends ServiceProvider
             return new Instagram([
                 'clientId'          => $app['config']->get('instagram.oauth.client_id'),
                 'clientSecret'      => $app['config']->get('instagram.oauth.client_secret'),
-                'redirectUri'       => route($app['config']->get('instagram.redirect_route')),
+                'redirectUri'       => route('instagram.redirect'),
                 'host'              => 'https://api.instagram.com',
                 'graphHost'         => 'https://graph.instagram.com',
             ]);

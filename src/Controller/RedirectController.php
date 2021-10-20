@@ -24,6 +24,6 @@ class RedirectController
             'expires_at' => Carbon::createFromTimestamp($longLivedToken->getExpires()),
         ]);
 
-        return redirect()->route(config('instagram.auth_redirect_route'));
+        return redirect()->route(config('instagram.redirects.success'));
     }
 }

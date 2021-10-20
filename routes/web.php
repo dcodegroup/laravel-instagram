@@ -8,8 +8,8 @@ use DcodeGroup\InstagramFeed\ProfileService;
 use DcodeGroup\InstagramFeed\StateValidationMiddleware;
 
 Route::as('instagram.')
-    ->prefix('instagram-oauth')
-    ->middleware('web')
+    ->prefix(config('instagram.routing.prefix'))
+    ->middleware(config('instagram.routing.middlewares'))
     ->group(function () {
         Route::get('/authorize', [AuthorizationController::class, 'form'])->name('authorize.form');
         Route::post('/authorize', [AuthorizationController::class, 'action'])->name('authorize');
@@ -20,9 +20,11 @@ Route::as('instagram.')
 
         Route::post('/deauthorize', DeauthorizeController::class)->name('deauthorize');
 
-        Route::get('/media-test', function (ProfileService $service) {
-            return view('instagram::media-test', [
-                'media' => $service->getMedia(Profile::latest()->first())
-            ]);
-        });
+        if (app()->environment('local')) {
+            Route::get('/media-test', function (ProfileService $service) {
+                return view('instagram::media-test', [
+                    'media' => $service->getMedias(Profile::latest()->first(), 15)
+                ]);
+            });
+        }
     });

@@ -11,8 +11,22 @@ return [
         'state_session_key' => 'instagram_oauth2_state',
     ],
 
-    'redirect_route' => 'instagram.redirect',
+    /*
+     * Here you may set the routing configuration for the oauth routes.
+     * You may change which middlewares will be applied to the routes.
+     *
+     * `web` middleware must be available to access session storage
+     * for storing state data to improve authorization security.
+     */
+    'routing' => [
+        'prefix' => 'instagram-oauth',
+        'middlewares' => ['web']
+    ],
 
-    'auth_redirect_route' => 'admin.home',
-
+    /*
+     * Here you may change the default redirect after successful OAuth authorization.
+     */
+    'redirects' => [
+        'success' => 'admin.home',
+    ],
 ];
