@@ -9,12 +9,13 @@ class InstagramProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
-        $this->loadMigrationsFrom(__DIR__ . '/../migrations');
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'instagram');
         $this->mergeConfigFrom(
             __DIR__ . '/../config/instagram.php', 'instagram'
         );
+
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        $this->loadMigrationsFrom(__DIR__ . '/../migrations');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'instagram');
 
         $this->app->bind(Instagram::class, function ($app) {
             return new Instagram([

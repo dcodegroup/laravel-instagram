@@ -7,7 +7,7 @@ use DcodeGroup\InstagramFeed\Profile;
 use DcodeGroup\InstagramFeed\ProfileService;
 use DcodeGroup\InstagramFeed\StateValidationMiddleware;
 
-Route::as('instagram.')
+Route::as(config('instagram.routing.name'))
     ->prefix(config('instagram.routing.prefix'))
     ->middleware(config('instagram.routing.middlewares'))
     ->group(function () {

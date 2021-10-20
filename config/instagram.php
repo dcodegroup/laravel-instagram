@@ -19,6 +19,7 @@ return [
      * for storing state data to improve authorization security.
      */
     'routing' => [
+        'name' => 'instagram.',
         'prefix' => 'instagram-oauth',
         'middlewares' => ['web']
     ],
