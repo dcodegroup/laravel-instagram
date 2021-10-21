@@ -21,7 +21,7 @@ class ProfileService
             $fields = ['media_url', 'media_type', 'timestamp'];
         }
 
-        $response = Http::withToken($profile->access_token)
+        $response = Http::withToken($profile->token())
             ->get($this->getEndpoint('/me/media'), ['fields' => join(',', $fields)])
             ->json();
 

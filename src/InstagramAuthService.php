@@ -16,11 +16,16 @@ class InstagramAuthService
         $this->provider = $provider;
     }
 
-    public function getAccessToken(string $code): AccessToken
+    public function acquireAccessTokenFromCode(string $code): AccessToken
     {
         return $this->provider->getAccessToken('authorization_code', [
             'code' => $code
         ]);
+    }
+
+    public function token(): ?AccessToken
+    {
+
     }
 
     public function getUser(AccessToken $token): InstagramResourceOwner
@@ -55,5 +60,16 @@ class InstagramAuthService
     public function getGraphHost(): string
     {
         return $this->provider->getGraphHost();
+    }
+
+    public function refreshToken(string $accessToken): AccessToken
+    {
+        $response = Http::get($this->provider->getGraphHost() . '/refresh_access_token', [
+            'grant_type' => 'ig_refresh_token',
+            'access_token' => $accessToken,
+        ])
+            ->json();
+
+        return new AccessToken($response);
     }
 }

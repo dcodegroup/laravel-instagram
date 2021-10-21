@@ -12,7 +12,7 @@ class RedirectController
     public function __invoke(Request $request, InstagramAuthService $instagramService)
     {
         // Try to get an access token (using the authorization code grant)
-        $token = $instagramService->getAccessToken($request->input('code'));
+        $token = $instagramService->acquireAccessTokenFromCode($request->input('code'));
 
         $user = $instagramService->getUser($token);
 
