@@ -1,12 +1,17 @@
 {
-    "name": "dcodegroup/instagramfeed",
-    "description": "Instagram Feed",
+    "name": "dcodegroup/laravel-instagram",
+    "description": "Instagram Package for Laravel",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Thong Nguyen",
             "email": "tom@dcode.com.au",
+            "homepage": "https://dcodegroup.com"
+        },
+        {
+            "name": "Robert Rimoczi",
+            "email": "robert@dcodegroup.com",
             "homepage": "https://dcodegroup.com"
         }
     ],
