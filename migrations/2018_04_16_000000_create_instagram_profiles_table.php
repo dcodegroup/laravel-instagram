@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInstagramsTable extends Migration
+class CreateInstagramProfilesTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -13,16 +13,13 @@ class CreateInstagramsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('instagrams', function (Blueprint $table) {
+		Schema::create('instagram_profiles', function (Blueprint $table) {
 			$table->increments('id');
-			$table->string('client_id');
-			$table->string('client_secret');
-			$table->string('redirect_uri');
 
-			$table->string('code')->nullable();
+			$table->string('profile_id');
+
 			$table->string('access_token')->nullable();
-
-			$table->unsignedInteger('user_id');
+			$table->dateTime('expires_at')->nullable();
 
 			$table->softDeletes();
 			$table->timestamps();
@@ -36,6 +33,6 @@ class CreateInstagramsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('instagrams');
+		Schema::dropIfExists('instagram_profiles');
 	}
 }
