@@ -44,6 +44,6 @@ class SignedRequest extends Request
 
     protected function generateSignature(string $payload): string
     {
-        return hash_hmac('sha256', $payload, config('instagram.client_secret'), true);
+        return hash_hmac('sha256', $payload, config('instagram.oauth.client_secret'), true);
     }
 }

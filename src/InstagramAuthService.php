@@ -37,7 +37,7 @@ class InstagramAuthService
     {
         $response = Http::get($this->provider->getGraphHost() . '/access_token', [
             'grant_type' => 'ig_exchange_token',
-            'client_secret' => config('instagram.client_secret'),
+            'client_secret' => config('instagram.oauth.client_secret'),
             'access_token' => $token->getToken(),
         ])
             ->json();
