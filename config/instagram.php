@@ -29,5 +29,6 @@ return [
      */
     'redirects' => [
         'success' => 'admin.home',
+        'error' => 'admin.home',
     ],
 ];
