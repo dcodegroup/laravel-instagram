@@ -30,19 +30,27 @@ class Profile extends Model
             throw new ProfileNotAuthorized();
         }
 
+        // If the token has expired, refresh it now.
         if ($this->expires_at < now()) {
-            throw new TokenExpired();
-        }
-
-        // If the token will expire in a week, refresh it.
-        if ($this->expires_at < now()->addWeek()) {
-            $authService = app()->make(InstagramAuthService::class);
-            $newAccessToken = $authService->refreshToken($this->access_token);
-            $this->access_token = $newAccessToken->getToken();
-            $this->expires_at = Carbon::createFromTimestamp($newAccessToken->getExpires());
-            $this->save();
+            try {
+                $this->refreshToken();
+            } catch (\Exception $e) {
+                throw new TokenExpired();
+            }
+        } elseif ($this->expires_at < now()->addWeek()) {
+            // If the token is not expired yet, but will expire in a week, refresh it.
+            $this->refreshToken();
         }
 
         return $this->access_token;
+    }
+
+    protected function refreshToken(): void
+    {
+        $authService = app()->make(InstagramAuthService::class);
+        $newAccessToken = $authService->refreshToken($this->access_token);
+        $this->access_token = $newAccessToken->getToken();
+        $this->expires_at = Carbon::createFromTimestamp($newAccessToken->getExpires());
+        $this->save();
     }
 }
