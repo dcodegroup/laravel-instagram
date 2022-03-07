@@ -17,7 +17,7 @@
     ],
     "require": {
         "guzzlehttp/guzzle": ">=6.0",
-        "league/oauth2-instagram": "^3.0"
+        "league/oauth2-instagram": "^3.1"
     },
     "autoload": {
         "psr-4": {
